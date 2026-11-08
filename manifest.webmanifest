@@ -1,0 +1,9 @@
+{
+  "name": "NEON ARENA",
+  "short_name": "NEON ARENA",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#070615",
+  "theme_color": "#090719",
+  "description": "Tu centro personal de minijuegos."
+}

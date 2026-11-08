@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090719">
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="description" content="Neon Arena: tu centro personal de minijuegos.">
+<title>NEON ARENA</title>
+<style>
+:root{--bg:#070615;--panel:#11102a;--panel2:#171438;--purple:#8b35ff;--cyan:#16d9ff;--muted:#9b97c2;--white:#f8f7ff;--line:#29244e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#2a1456 0%,#100c2b 35%,var(--bg) 72%);color:var(--white);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh;padding-bottom:84px}
+header{padding:18px 18px 12px;display:flex;align-items:center;justify-content:space-between;max-width:760px;margin:auto}
+.brand{font-weight:1000;letter-spacing:2px;font-size:20px}.brand span{color:var(--cyan);text-shadow:0 0 14px #16d9ff}
+.avatar{width:38px;height:38px;border-radius:14px;background:linear-gradient(135deg,#8b35ff,#16d9ff);display:grid;place-items:center;font-size:20px;box-shadow:0 0 20px #7134d966}
+main{max-width:760px;margin:auto;padding:0 16px}.hero{border:1px solid #493080;border-radius:22px;padding:18px;background:linear-gradient(115deg,#241052,#10142f 65%,#092e49);position:relative;overflow:hidden;box-shadow:0 10px 35px #0008}
+.hero:after{content:"✦";position:absolute;right:18px;top:10px;font-size:76px;color:#37dfff55;text-shadow:0 0 30px #16d9ff}
+.eyebrow{color:#70eaff;font-size:10px;letter-spacing:2px;font-weight:800}.hero h1{font-size:24px;margin:7px 0}.hero p{color:#c8c4e9;font-size:12px;margin:0 0 14px;max-width:75%}
+button{border:0;color:white;font-weight:800;cursor:pointer;font-size:12px}
+.primary{background:linear-gradient(90deg,#792aff,#b02dff);padding:11px 16px;border-radius:13px;box-shadow:0 5px 20px #8b35ff55}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:21px 2px 10px}.section-head h2{font-size:15px;margin:0}.muted{color:var(--muted);font-size:11px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.game{background:linear-gradient(145deg,#171438,#0d0c21);border:1px solid var(--line);border-radius:17px;padding:13px;min-height:125px;position:relative}
+.game .emoji{font-size:27px}.game h3{font-size:13px;margin:7px 0 3px}.game p{font-size:10px;color:var(--muted);margin:0 0 10px}.game button{background:#382064;border:1px solid #7743bb;padding:8px 11px;border-radius:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}.stat{background:#11102a;border:1px solid var(--line);border-radius:14px;padding:11px;text-align:center}.stat b{display:block;font-size:18px;color:#b990ff}.stat small{font-size:9px;color:var(--muted)}
+.panel{background:#11102a;border:1px solid var(--line);border-radius:17px;padding:14px;margin-top:12px}
+.listrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #282344}.listrow:last-child{border:0}.listrow .ico{width:34px;height:34px;border-radius:11px;background:#25194a;display:grid;place-items:center}.listrow strong{font-size:12px}.listrow small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.listrow .right{margin-left:auto;color:#a9ffdb;font-size:11px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#0c0a20ee;backdrop-filter:blur(16px);border-top:1px solid #302650;display:flex;justify-content:center;z-index:5;padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+nav button{background:transparent;color:#8983ac;flex:1;max-width:150px;padding:6px 2px;font-size:10px}nav button span{display:block;font-size:19px;margin-bottom:2px}nav button.active{color:#c58aff;text-shadow:0 0 12px #a34dff}
+.view{display:none}.view.active{display:block}
+.back{background:#21183e;border:1px solid #49316c;padding:9px 12px;border-radius:10px;margin:10px 0}
+.playarea{min-height:260px;display:grid;place-items:center;text-align:center;padding:20px}
+.big{font-size:44px;font-weight:1000;margin:10px}.game-action{min-width:180px;padding:17px;border-radius:15px;background:linear-gradient(90deg,#782bff,#a82dff);font-size:15px}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:330px;margin:14px auto}.tile{aspect-ratio:1;background:#24194a;border:1px solid #57378c;border-radius:12px;font-size:24px}
+.quizopt{display:block;width:100%;margin:8px 0;padding:12px;border-radius:12px;background:#21183e;border:1px solid #49316c}
+input{background:#0b0a1b;color:white;border:1px solid #49316c;border-radius:10px;padding:11px;width:100%;margin:7px 0}
+.notice{font-size:10px;color:#a9a3c9;line-height:1.5}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:30px}}
+</style>
+</head>
+<body>
+<header><div class="brand">NEON <span>ARENA</span></div><div class="avatar">⚡</div></header>
+<main>
+<section id="home" class="view active">
+ <div class="hero"><div class="eyebrow">TU ZONA DE JUEGO</div><h1>¡Bienvenido a la arena!</h1><p>Juega, supera tus récords y gana experiencia. Todo desde tu teléfono.</p><button class="primary" onclick="openGame('reaction')">▶ JUGAR AHORA</button></div>
+ <div class="stats"><div class="stat"><b id="xp">0</b><small>EXPERIENCIA XP</small></div><div class="stat"><b id="played">0</b><small>PARTIDAS</small></div><div class="stat"><b id="best">—</b><small>RÉCORD (ms)</small></div></div>
+ <div class="section-head"><h2>Juegos disponibles</h2><span class="muted">3 minijuegos</span></div>
+ <div class="grid">
+  <article class="game"><div class="emoji">⚡</div><h3>Reflejos neon</h3><p>Pon a prueba tu velocidad.</p><button onclick="openGame('reaction')">Jugar</button></article>
+  <article class="game"><div class="emoji">🧠</div><h3>Memoria cósmica</h3><p>Encuentra las parejas.</p><button onclick="openGame('memory')">Jugar</button></article>
+  <article class="game"><div class="emoji">🚀</div><h3>Quiz espacial</h3><p>Responde y suma puntos.</p><button onclick="openGame('quiz')">Jugar</button></article>
+ </div>
+ <div class="section-head"><h2>Actividad reciente</h2><span class="muted">En este dispositivo</span></div>
+ <div class="panel" id="recent"><div class="muted">Todavía no hay partidas. ¡Juega la primera!</div></div>
+</section>
+<section id="matches" class="view">
+ <div class="section-head"><h2>🏆 Partidas</h2><span class="muted">Tu progreso</span></div>
+ <div class="panel"><div class="eyebrow">NIVEL ACTUAL</div><h1 style="margin:5px 0">Novato neon</h1><div class="muted">Gana XP jugando minijuegos.</div><div style="height:8px;background:#292344;border-radius:9px;margin:14px 0;overflow:hidden"><div id="xpbar" style="width:0%;height:100%;background:linear-gradient(90deg,#8b35ff,#16d9ff)"></div></div><small class="muted" id="xptext">0 / 100 XP para el siguiente nivel</small></div>
+ <div class="section-head"><h2>Historial</h2></div><div class="panel" id="history"><div class="muted">Tu historial aparecerá aquí.</div></div>
+</section>
+<section id="friends" class="view">
+ <div class="section-head"><h2>👥 Amigos</h2></div>
+ <div class="panel"><div class="eyebrow">TU PERFIL LOCAL</div><h3 id="playername">Jugador neon</h3><p class="muted">Esta versión guarda tus datos solo en este dispositivo.</p><input id="nameinput" maxlength="18" placeholder="Escribe tu apodo"><button class="primary" onclick="saveName()">Guardar apodo</button></div>
+ <div class="section-head"><h2>Invitar amigos</h2></div><div class="panel"><p class="notice">La lista de amigos y las partidas en línea necesitan un servidor y cuentas. Esta primera versión es privada y funciona localmente; no envía tus datos a otras personas.</p><button class="primary" onclick="shareApp()">Compartir acceso</button></div>
+</section>
+<section id="profile" class="view">
+ <div class="section-head"><h2>👾 Mi perfil</h2></div><div class="panel" style="text-align:center;padding:24px"><div class="avatar" style="width:70px;height:70px;margin:auto;font-size:32px">⚡</div><h2 id="profileName">Jugador neon</h2><div class="muted">Explorador de NEON ARENA</div></div>
+ <div class="stats"><div class="stat"><b id="pXp">0</b><small>XP</small></div><div class="stat"><b id="pPlayed">0</b><small>PARTIDAS</small></div><div class="stat"><b id="pLevel">1</b><small>NIVEL</small></div></div>
+ <div class="panel"><button class="back" onclick="resetProgress()">Reiniciar progreso</button><p class="notice">El progreso se guarda en el almacenamiento de tu navegador. Si borras los datos del navegador, podrías perderlo.</p></div>
+</section>
+<section id="gameview" class="view">
+ <button class="back" onclick="showTab('home')">← Volver al inicio</button><div class="panel"><div class="eyebrow">MINIJUEGO</div><h2 id="gameTitle">Reflejos neon</h2><div id="gameContent" class="playarea"></div></div>
+</section>
+</main>
+<nav>
+ <button class="active" data-tab="home" onclick="showTab('home')"><span>⌂</span>Inicio</button>
+ <button data-tab="matches" onclick="showTab('matches')"><span>🏆</span>Partidas</button>
+ <button data-tab="friends" onclick="showTab('friends')"><span>♙</span>Amigos</button>
+ <button data-tab="profile" onclick="showTab('profile')"><span>👾</span>Perfil</button>
+</nav>
+<script>
+const $=id=>document.getElementById(id);
+let data=JSON.parse(localStorage.getItem('neonArena')||'{"xp":0,"played":0,"best":null,"history":[],"name":"Jugador neon"}');
+function save(){localStorage.setItem('neonArena',JSON.stringify(data));refresh()}
+function refresh(){
+ $('xp').textContent=data.xp;$('played').textContent=data.played;$('best').textContent=data.best??'—';
+ $('pXp').textContent=data.xp;$('pPlayed').textContent=data.played;$('pLevel').textContent=Math.floor(data.xp/100)+1;
+ $('xpbar').style.width=(data.xp%100)+'%';$('xptext').textContent=(data.xp%100)+' / 100 XP para el siguiente nivel';
+ $('playername').textContent=data.name;$('profileName').textContent=data.name;
+ const rows=data.history.slice(0,5).map(x=>`<div class="listrow"><div class="ico">${x.icon}</div><div><strong>${x.game}</strong><small>${x.detail}</small></div><div class="right">+${x.xp} XP</div></div>`).join('');
+ $('recent').innerHTML=rows||'<div class="muted">Todavía no hay partidas. ¡Juega la primera!</div>';
+ $('history').innerHTML=rows||'<div class="muted">Tu historial aparecerá aquí.</div>';
+}
+function showTab(tab){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));$(tab).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));}
+function award(game,icon,xp,detail){data.xp+=xp;data.played++;data.history.unshift({game,icon,xp,detail});data.history=data.history.slice(0,20);save()}
+function openGame(g){showTab('gameview');if(g==='reaction')reaction();if(g==='memory')memory();if(g==='quiz')quiz()}
+function reaction(){
+ $('gameTitle').textContent='⚡ Reflejos neon';
+ $('gameContent').innerHTML='<div><div class="muted">Pulsa cuando el panel se vuelva VERDE.</div><div class="big" id="reactmsg">¿Preparado?</div><button class="game-action" id="reactbtn">EMPEZAR</button><p class="muted" id="reactinfo">No pulses antes de tiempo.</p></div>';
+ let state='ready',start=0,timer;
+ $('reactbtn').onclick=()=>{if(state==='ready'){state='wait';$('reactbtn').disabled=true;$('reactbtn').textContent='ESPERA...';$('reactmsg').textContent='🟣';timer=setTimeout(()=>{state='go';start=performance.now();$('gameContent').style.background='#0b4b39';$('reactmsg').textContent='¡AHORA!';$('reactbtn').disabled=false;$('reactbtn').textContent='¡PULSAR!'},1200+Math.random()*2500)}else if(state==='wait'){clearTimeout(timer);state='ready';$('reactmsg').textContent='¡Muy pronto!';$('reactinfo').textContent='Te adelantaste. Inténtalo otra vez.';$('reactbtn').disabled=false;$('reactbtn').textContent='REINTENTAR'}else if(state==='go'){let ms=Math.round(performance.now()-start);state='done';$('gameContent').style.background='';$('reactmsg').textContent=ms+' ms';$('reactinfo').textContent='¡Buen reflejo! Ganaste 20 XP.';$('reactbtn').textContent='JUGAR OTRA VEZ';award('Reflejos neon','⚡',20,ms+' milisegundos');$('reactbtn').onclick=()=>reaction() }else reaction()};
+}
+function memory(){
+ $('gameTitle').textContent='🧠 Memoria cósmica';const icons=['🌙','🚀','🪐','👾','💎','⭐','🛸','🔥'];let deck=[...icons,...icons].sort(()=>Math.random()-.5),open=[],matched=0,moves=0,locked=false;
+ $('gameContent').innerHTML='<div style="width:100%"><div class="muted" id="meminfo">Encuentra las 8 parejas. Movimientos: 0</div><div class="memory-grid" id="memgrid"></div><button class="back" onclick="memory()">Mezclar de nuevo</button></div>';
+ const grid=$('memgrid');deck.forEach((v,i)=>{let b=document.createElement('button');b.className='tile';b.textContent='?';b.onclick=()=>{if(locked||b.dataset.done||open.includes(i))return;b.textContent=v;open.push(i);if(open.length===2){moves++;locked=true;setTimeout(()=>{let [a,c]=open;if(deck[a]===deck[c]){grid.children[a].dataset.done='1';grid.children[c].dataset.done='1';matched++;}else{grid.children[a].textContent='?';grid.children[c].textContent='?'}open=[];locked=false;$('meminfo').textContent=`Parejas: ${matched}/8 · Movimientos: ${moves}`;if(matched===8){$('meminfo').textContent='¡Completado! Ganaste 40 XP.';award('Memoria cósmica','🧠',40,moves+' movimientos')}} ,650)}};grid.appendChild(b)});
+}
+function quiz(){
+ const qs=[['¿Qué planeta es conocido como el planeta rojo?',['Marte','Venus','Júpiter'],0],['¿Cuántos lados tiene un hexágono?',['5','6','8'],1],['¿Qué estrella ilumina la Tierra?',['Sirio','El Sol','Polar'],1],['¿Cuál es el satélite natural de la Tierra?',['La Luna','Fobos','Europa'],0]];
+ let i=0,score=0;function draw(){if(i>=qs.length){$('gameContent').innerHTML=`<div><div class="big">🚀 ${score}/4</div><h3>Quiz terminado</h3><p class="muted">Ganaste ${score*10} XP.</p><button class="game-action" onclick="quiz()">VOLVER A JUGAR</button></div>`;award('Quiz espacial','🚀',score*10,score+' de 4 respuestas correctas');return}
+ let q=qs[i];$('gameContent').innerHTML=`<div style="width:100%"><div class="muted">Pregunta ${i+1} de 4 · Puntos: ${score}</div><h3>${q[0]}</h3><div id="opts"></div></div>`;q[1].forEach((v,n)=>{let b=document.createElement('button');b.className='quizopt';b.textContent=v;b.onclick=()=>{if(n===q[2])score++;i++;draw()};$('opts').appendChild(b)})}draw();
+}
+function saveName(){let n=$('nameinput').value.trim();if(n){data.name=n;save();$('nameinput').value=''}}
+function shareApp(){if(navigator.share)navigator.share({title:'NEON ARENA',text:'Prueba mi plataforma de minijuegos NEON ARENA'});else alert('Cuando publiques tu app en internet podrás compartir un enlace y crear un QR.')}
+function resetProgress(){if(confirm('¿Reiniciar todo tu progreso?')){data.xp=0;data.played=0;data.best=null;data.history=[];save()}}
+refresh();
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
